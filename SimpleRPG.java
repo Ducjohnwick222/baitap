@@ -1,71 +1,74 @@
-interface Attacker {
-    void attack();
-}
+import java.util.ArrayList;
 
-abstract class Character implements Attacker {
-    protected String name;
-    protected int hp;
-    protected int baseDamage;
+class Character {
+    String name;
+    String type;
+    int hp;
+    int baseDamage;
 
-    public Character(String name, int hp, int baseDamage) {
+    Character(String name, String type, int hp, int baseDamage) {
         this.name = name;
+        this.type = type;
         this.hp = hp;
         this.baseDamage = baseDamage;
+    }
+
+    void attack() {
+        System.out.println(name + " (" + type + ") attacks!");
     }
 }
 
 class Warrior extends Character {
-    public Warrior(String name, int hp, int baseDamage) {
-        super(name, hp, baseDamage);
+    Warrior(String name, int hp, int baseDamage) {
+        super(name, "Warrior", hp, baseDamage);
     }
 
-    public void attack() {
-        System.out.println(name + " (Warrior) attacks with a sword!");
+    void attack() {
+        System.out.println(name + " (Warrior) swings a mighty sword!");
     }
 }
 
 class Archer extends Character {
-    public Archer(String name, int hp, int baseDamage) {
-        super(name, hp, baseDamage);
+    Archer(String name, int hp, int baseDamage) {
+        super(name, "Archer", hp, baseDamage);
     }
 
-    public void attack() {
-        System.out.println(name + " (Archer) shoots an arrow!");
+    void attack() {
+        System.out.println(name + " (Archer) fires an arrow!");
     }
 }
 
 class Mage extends Character {
-    public Mage(String name, int hp, int baseDamage) {
-        super(name, hp, baseDamage);
+    Mage(String name, int hp, int baseDamage) {
+        super(name, "Mage", hp, baseDamage);
     }
 
-    public void attack() {
-        System.out.println(name + " (Mage) casts a fireball!");
+    void attack() {
+        System.out.println(name + " (Mage) unleashes a fire spell!");
     }
 }
 
 class ArcaneArcher extends Character {
-    public ArcaneArcher(String name, int hp, int baseDamage) {
-        super(name, hp, baseDamage);
+    ArcaneArcher(String name, int hp, int baseDamage) {
+        super(name, "ArcaneArcher", hp, baseDamage);
     }
 
-    public void attack() {
-        System.out.println(name + " (ArcaneArcher) shoots an arrow!");
-        System.out.println(name + " also casts a magic spell!");
+    void attack() {
+        System.out.println(name + " (ArcaneArcher) fires an arrow!");
+        System.out.println(name + " also conjures a magic bolt!");
     }
 }
 
 public class SimpleRPG {
     public static void main(String[] args) {
-        Attacker[] team = {
-                new Warrior("Arthur", 120, 15),
-                new Archer("Legolas", 100, 12),
-                new Mage("Gandalf", 80, 20),
-                new ArcaneArcher("Sylvanas", 90, 18)
-        };
+        ArrayList<Character> heroes = new ArrayList<>();
+        heroes.add(new Warrior("Arthur", 120, 15));
+        heroes.add(new Archer("Legolas", 100, 12));
+        heroes.add(new Mage("Gandalf", 80, 20));
+        heroes.add(new ArcaneArcher("Sylvanas", 90, 18));
 
-        for (Attacker a : team) {
-            a.attack();
+        for (Character c : heroes) {
+            c.attack();
         }
     }
 }
